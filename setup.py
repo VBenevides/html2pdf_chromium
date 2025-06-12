@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name="html2pdf_chromium",
-    version="0.1.0",
+    version="0.1.1",
     author="Vinicius Benevides",
     author_email="massaki1999@gmail.com",
     description="Convert HTML to PDF using Chromium browsers with zero Python dependencies",

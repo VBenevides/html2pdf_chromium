@@ -167,6 +167,17 @@ class Converter:
                 logging.error(error_message)
                 raise PDFConversionError(error_message) from e
 
+        if not os.path.exists(pdf_path):
+            try:
+                err = process.stderr
+            except Exception:
+                err = None
+
+            if err is None:
+                raise PDFConversionError("PDF conversion failed: File was not created")
+            else:
+                raise PDFConversionError(f"PDF conversion failed: File was not created. Err: {err}")
+
         logging.info(f"Successfully created PDF: {pdf_path}")
         return True
 
