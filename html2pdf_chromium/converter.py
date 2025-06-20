@@ -46,7 +46,7 @@ class Converter:
         self,
         browser: str = "chrome",
         executable_path: Optional[str] = None,
-        headless_mode: str = "new",
+        headless_mode: Optional[str] = None,
     ):
         """
         Initializes the Chromium converter.
@@ -56,8 +56,9 @@ class Converter:
                            Defaults to 'chrome'.
             executable_path (Optional[str]): The explicit path to the browser executable.
                                              If None, searches in default locations.
-            headless_mode (str): The headless mode to use ('new' or 'old').
-                                 'new' is recommended. Defaults to 'new'.
+            headless_mode (Optional[str]): The headless mode to use
+                                            If not value is given, uses the default headless for the chrome version
+                                            Possible values = ["old", "new"]
         """
         self.browser = browser.lower()
         self.executable_path = Path(executable_path or self._find_executable_path()).resolve()
@@ -115,11 +116,17 @@ class Converter:
         # Use pathlib's as_uri() to create a proper file URI for all OSes
         html_uri = html_path.as_uri()
 
+        if self.headless_mode is None:
+            headless = "--headless"
+        else:
+            headless = f"--headless={self.headless_mode}"
+
         command = [
             self.executable_path,
-            f"--headless={self.headless_mode}",
-            "--disable-gpu",  # Often needed in headless environments
+            headless,
+            "--disable-gpu",
             "--no-pdf-header-footer",
+            "--print-to-pdf-no-header",  # Necessary older versions of chrome (https://developer.chrome.com/docs/chromium/headless)
             f"--print-to-pdf={pdf_path}",
         ]
 
@@ -144,7 +151,7 @@ class Converter:
                     profile_command,
                     check=True,
                     capture_output=True,
-                    text=True,  # Use text=True for automatic decoding
+                    text=True,
                     timeout=timeout,
                 )
                 if process.stdout:
