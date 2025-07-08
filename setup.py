@@ -2,13 +2,13 @@ from setuptools import setup, find_packages
 
 setup(
     name="html2pdf_chromium",
-    version="0.1.2",
+    version="0.1.3",
     author="Vinicius Benevides",
     author_email="massaki1999@gmail.com",
     description="Convert HTML to PDF using Chromium browsers with zero Python dependencies",
     long_description=open("README.md", encoding="utf-8").read(),
     long_description_content_type="text/markdown",
-    url="https://github.com/VBenevides/html2pdf_chromium",  # Change this to your actual repo URL
+    url="https://github.com/VBenevides/html2pdf_chromium",
     packages=find_packages(),
     classifiers=[
         "Programming Language :: Python :: 3",
