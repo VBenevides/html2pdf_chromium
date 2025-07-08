@@ -1,4 +1,4 @@
-# html2pdf_chromium
+# html2pdf-chromium
 
 Convert HTML files or HTML strings to PDF using Chromium-based browsers(like Chrome or Edge) in headless mode without dependencies such as chromedriver.
 
@@ -13,7 +13,7 @@ Convert HTML files or HTML strings to PDF using Chromium-based browsers(like Chr
 ## 📦 Installation
 
 ```bash
-pip install html2pdf_chromium
+pip install html2pdf-chromium
 ```
 
 
